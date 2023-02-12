@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, createContext} from "react";
+import DataProps from "./interfData"
+
 
 import {
     BarChart,
@@ -9,29 +11,15 @@ import {
     Cell
 
 } from 'recharts';
-const data = [
-    {
-        name: 'Page A',
-        uv: 400,
-        pv: 2400,
-        amt: 2400
-    }, {
-        name: 'Page B',
-        uv: 400,
-        pv: 2400,
-        amt: 2400
-    },
-
-];
 
 
-const BarGraph = () => {
+const BarGraph = (dataProp:DataProps) => {
     const [focusBar, setFocusBar] = useState < any | null > (null);
 
     return(< BarChart 
     width = {600}
     height = {300} 
-    data = {data}
+    data = {dataProp.dataProp}
     onMouseMove = {
         (state) => {
             if (state.isTooltipActive) {
@@ -44,13 +32,8 @@ const BarGraph = () => {
     <YAxis/>
     <Bar dataKey="uv"
         barSize={30}>
-        {
-
-        data.map((entry, index) => (
-            <Cell fill={focusBar === index ? "#014c56" : "#8fdee9"
-            }/>
-        ))
-    }</Bar> < Tooltip cursor = {{fill: 'transparent'}}/>
+        </Bar> 
+        < Tooltip cursor = {{fill: 'transparent'}}/>
     </BarChart >)
 
 
